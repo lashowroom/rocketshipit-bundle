@@ -2,7 +2,7 @@
 
 namespace LAShowroom\RocketShipitBundle\Model\ShipmentRequest;
 
-class Package
+class Label
 {
     /**
      * @var string
@@ -20,7 +20,6 @@ class Package
     private $labelImage;
 
     /**
-     * Package constructor.
      * @param string $trackingNumber
      * @param string $labelFormat
      * @param string $labelImage

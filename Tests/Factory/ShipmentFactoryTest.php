@@ -13,7 +13,7 @@ use LAShowroom\RocketShipitBundle\Model\Package;
 use LAShowroom\RocketShipitBundle\Model\ShipmentRequest\UpsShipmentRequest;
 use RocketShipIt\Shipment;
 
-class ShipmentFactoryTest  extends \PHPUnit_Framework_TestCase
+class ShipmentFactoryTest extends \PHPUnit_Framework_TestCase
 {
     public function testRate()
     {

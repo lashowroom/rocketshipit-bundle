@@ -23,9 +23,9 @@ class ShipmentResponse
     private $mainTrackingNumber;
 
     /**
-     * @var
+     * @var Label[]
      */
-    private $packages;
+    private $labels;
 
     /**
      * @var ShipmentRequest
@@ -34,6 +34,7 @@ class ShipmentResponse
 
     /**
      * @param ShipmentRequest $shipmentRequest
+     * @param array           $response
      */
     public function __construct(ShipmentRequest $shipmentRequest, array $response)
     {
@@ -48,7 +49,47 @@ class ShipmentResponse
         $this->mainTrackingNumber = $response['trk_main'];
 
         foreach ($response['pkgs'] as $pkg) {
-            $this->packages[] = new Package($pkg['pkg_trk_num'], $pkg['label_fmt'], $pkg['label_img']);
+            $this->labels[] = new Label($pkg['pkg_trk_num'], $pkg['label_fmt'], $pkg['label_img']);
         }
+    }
+
+    /**
+     * @return Money
+     */
+    public function getCharges(): Money
+    {
+        return $this->charges;
+    }
+
+    /**
+     * @return Money
+     */
+    public function getNegotiatedCharges(): Money
+    {
+        return $this->negotiatedCharges;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMainTrackingNumber(): string
+    {
+        return $this->mainTrackingNumber;
+    }
+
+    /**
+     * @return Label[]
+     */
+    public function getLabels(): array
+    {
+        return $this->labels;
+    }
+
+    /**
+     * @return ShipmentRequest
+     */
+    public function getShipmentRequest(): ShipmentRequest
+    {
+        return $this->shipmentRequest;
     }
 }

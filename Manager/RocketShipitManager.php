@@ -33,7 +33,7 @@ class RocketShipitManager
 
     public function getRates(RateRequest $rateRequest)
     {
-        $rate = $this->rateFactory->createRateRequest($rateRequest);
+        $rate = $this->rateFactory->createRate($rateRequest);
 
         $response = $rate->getAllRates();
 
