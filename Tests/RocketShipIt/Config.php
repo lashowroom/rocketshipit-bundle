@@ -1,8 +1,6 @@
 <?php
 
-
-namespace RocketShipit;
-
+namespace RocketShipIt;
 
 class Config
 {

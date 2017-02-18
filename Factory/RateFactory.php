@@ -28,14 +28,14 @@ class RateFactory
         $this->configuration = $configuration;
     }
 
-    public function createRateRequest(RateRequest $rateRequest)
+    public function createRate(RateRequest $rateRequest)
     {
         $rate = new Rate($rateRequest->getCarrier()->__toString(), $this->configuration->getConfiguration());
-        $rate->setParameter('toCity', $rateRequest->getDestinationCity());
-        $rate->setParameter('toState', $rateRequest->getDestinationState());
-        $rate->setParameter('toCode', $rateRequest->getDestinationZipcode());
+        $rate->setParameter('toCity', $rateRequest->getDestinationAddress()->getCity());
+        $rate->setParameter('toState', $rateRequest->getDestinationAddress()->getState());
+        $rate->setParameter('toCode', $rateRequest->getDestinationAddress()->getZipcode());
         $rate->setParameter('negotiatedRates', $rateRequest->isNegotiatedRates());
-        $rate->setParameter('shipCode', $rateRequest->getSourceZipcode());
+        $rate->setParameter('shipCode', $rateRequest->getSourceAddress()->getZipcode());
 
         foreach ($rateRequest->getPackages() as $package) {
             $rate->addPackageToShipment($this->packageFactory->createPackage($rateRequest->getCarrier(), $package));

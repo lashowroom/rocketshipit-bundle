@@ -14,6 +14,6 @@ EOM;
     }
 
     $classLoader = new ClassLoader();
-    $classLoader->addPsr4("RocketShipIt\\", __DIR__.'/RocketShipItDummy', true);
+    $classLoader->addPsr4("RocketShipIt\\", __DIR__.'/RocketShipIt', true);
     $classLoader->register();
 }

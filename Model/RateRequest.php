@@ -7,24 +7,14 @@ use LAShowroom\RocketShipitBundle\Model\Carrier\Carrier;
 class RateRequest
 {
     /**
-     * @var string
+     * @var Address
      */
-    private $sourceZipcode;
+    private $sourceAddress;
 
     /**
-     * @var string
+     * @var Address
      */
-    private $destinationZipcode;
-
-    /**
-     * @var string
-     */
-    private $destinationCity;
-
-    /**
-     * @var string
-     */
-    private $destinationState;
+    private $destinationAddress;
 
     /**
      * @var bool
@@ -42,19 +32,15 @@ class RateRequest
     private $carrier;
 
     /**
-     * @param string $sourceZipcode
-     * @param string $destinationZipcode
-     * @param string $destinationCity
-     * @param string $destinationState
-     * @param bool   $negotiatedRates
+     * @param Address $sourceAddress
+     * @param Address $destinationAddress
+     * @param bool    $negotiatedRates
      * @param Carrier $carrier
      */
-    public function __construct($sourceZipcode, $destinationZipcode, $destinationCity, $destinationState, $negotiatedRates, Carrier $carrier)
+    public function __construct(Address $sourceAddress, Address $destinationAddress, $negotiatedRates, Carrier $carrier)
     {
-        $this->sourceZipcode = $sourceZipcode;
-        $this->destinationZipcode = $destinationZipcode;
-        $this->destinationCity = $destinationCity;
-        $this->destinationState = $destinationState;
+        $this->sourceAddress = $sourceAddress;
+        $this->destinationAddress = $destinationAddress;
         $this->negotiatedRates = $negotiatedRates;
         $this->carrier = $carrier;
     }
@@ -62,38 +48,6 @@ class RateRequest
     public function addPackage(Package $package)
     {
         $this->packages[] = $package;
-    }
-
-    /**
-     * @return string
-     */
-    public function getSourceZipcode(): string
-    {
-        return $this->sourceZipcode;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDestinationZipcode(): string
-    {
-        return $this->destinationZipcode;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDestinationCity(): string
-    {
-        return $this->destinationCity;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDestinationState(): string
-    {
-        return $this->destinationState;
     }
 
     /**
@@ -118,5 +72,21 @@ class RateRequest
     public function getCarrier(): Carrier
     {
         return $this->carrier;
+    }
+
+    /**
+     * @return Address
+     */
+    public function getSourceAddress(): Address
+    {
+        return $this->sourceAddress;
+    }
+
+    /**
+     * @return Address
+     */
+    public function getDestinationAddress(): Address
+    {
+        return $this->destinationAddress;
     }
 }

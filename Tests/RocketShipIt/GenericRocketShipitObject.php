@@ -1,13 +1,11 @@
 <?php
 
-namespace RocketShipit;
+namespace RocketShipIt;
 
-class Package
+class GenericRocketShipitObject
 {
     public $carrier;
-
     public $configuration;
-
     public $parameters = [];
 
     /**
