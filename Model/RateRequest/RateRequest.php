@@ -1,8 +1,10 @@
 <?php
 
-namespace LAShowroom\RocketShipitBundle\Model;
+namespace LAShowroom\RocketShipitBundle\Model\RateRequest;
 
+use LAShowroom\RocketShipitBundle\Model\Address;
 use LAShowroom\RocketShipitBundle\Model\Carrier\Carrier;
+use LAShowroom\RocketShipitBundle\Model\Package;
 
 class RateRequest
 {
@@ -43,6 +45,7 @@ class RateRequest
         $this->destinationAddress = $destinationAddress;
         $this->negotiatedRates = $negotiatedRates;
         $this->carrier = $carrier;
+        $this->packages = [];
     }
 
     public function addPackage(Package $package)

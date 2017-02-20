@@ -93,4 +93,12 @@ class Rate
     {
         return $this->negotiatedRate;
     }
+
+    /**
+     * @return string
+     */
+    public function getServiceDescription(): string
+    {
+        return $this->serviceDescription;
+    }
 }

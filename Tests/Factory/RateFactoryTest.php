@@ -10,7 +10,7 @@ use LAShowroom\RocketShipitBundle\Model\Carrier\Ups;
 use LAShowroom\RocketShipitBundle\Model\Dimensions\Cuboid;
 use LAShowroom\RocketShipitBundle\Model\Dimensions\Weight;
 use LAShowroom\RocketShipitBundle\Model\Package;
-use LAShowroom\RocketShipitBundle\Model\RateRequest;
+use LAShowroom\RocketShipitBundle\Model\RateRequest\RateRequest;
 use RocketShipIt\Rate;
 
 class RateFactoryTest extends \PHPUnit_Framework_TestCase

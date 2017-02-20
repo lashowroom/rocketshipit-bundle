@@ -3,7 +3,7 @@
 namespace LAShowroom\RocketShipitBundle\Factory;
 
 use LAShowroom\RocketShipitBundle\DependencyInjection\RocketShipitConfiguration;
-use LAShowroom\RocketShipitBundle\Model\RateRequest;
+use LAShowroom\RocketShipitBundle\Model\RateRequest\RateRequest;
 use RocketShipIt\Rate;
 
 class RateFactory

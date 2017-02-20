@@ -1,6 +1,6 @@
 <?php
 
-namespace LAShowroom\RocketShipitBundle\Model;
+namespace LAShowroom\RocketShipitBundle\Model\RateRequest;
 
 use LAShowroom\RocketShipitBundle\Model\Response\Rate;
 use Money\Currency;

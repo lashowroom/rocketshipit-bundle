@@ -4,8 +4,8 @@ namespace LAShowroom\RocketShipitBundle\Manager;
 
 use LAShowroom\RocketShipitBundle\Factory\RateFactory;
 use LAShowroom\RocketShipitBundle\Factory\ShipmentFactory;
-use LAShowroom\RocketShipitBundle\Model\RateRequest;
-use LAShowroom\RocketShipitBundle\Model\RateResponse;
+use LAShowroom\RocketShipitBundle\Model\RateRequest\RateRequest;
+use LAShowroom\RocketShipitBundle\Model\RateRequest\RateResponse;
 use LAShowroom\RocketShipitBundle\Model\ShipmentRequest\ShipmentRequest;
 use LAShowroom\RocketShipitBundle\Model\ShipmentRequest\ShipmentResponse;
 
