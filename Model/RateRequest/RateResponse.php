@@ -53,4 +53,12 @@ class RateResponse
     {
         return $this->rates;
     }
+
+    /**
+     * @return RateRequest
+     */
+    public function getRequest(): RateRequest
+    {
+        return $this->request;
+    }
 }

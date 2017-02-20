@@ -28,6 +28,6 @@ class RocketShipitConfigurationTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($expected, $configuration->getConfiguration()['config']->parameters);
 
-        $rocketShipitConfiguration = $configuration->getConfiguration();
+        $configuration->getConfiguration();
     }
 }

@@ -25,14 +25,9 @@ class RocketShipitManagerTest extends \PHPUnit_Framework_TestCase
 {
     public function testGetLabel()
     {
-        $shipmentRequest = new UpsShipmentRequest($this->getSourceAddress(), $this->getDestinationAddress(), new Ups(), '03');
-        $shipmentRequest->setPickupType(Ups::PICKUP_TYPE_CUSTOMER_COUNTER);
-        $shipmentRequest->setNegotiatedRates(true);
-        $shipmentRequest->setAddressVerificationEnabled(true);
+        $shipmentRequest = $this->getShipmentRequest();
 
-        $shipmentRequest->addPackage(
-            new Package(new Weight(1.1, Weight::UNIT_LBS), new Cuboid(1, 2, 3, Cuboid::UNIT_INCH), 'doge')
-        );
+        $shipmentRequest->addPackage($this->getPackage());
 
         $response = $this->getManager()->getLabel($shipmentRequest);
 
@@ -53,7 +48,8 @@ class RocketShipitManagerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetRates()
     {
-        $rateRequest = new RateRequest($this->getSourceAddress(), $this->getDestinationAddress(), true, new Ups());
+        $rateRequest = $this->getRateRequest();
+        $rateRequest->addPackage($this->getPackage());
 
         $response = $this->getManager()->getRates($rateRequest);
 
@@ -102,5 +98,36 @@ class RocketShipitManagerTest extends \PHPUnit_Framework_TestCase
         $destinationAddress = new Address('company2', 'name2', 'contact2', 'address12', 'address22', 'city2', 'state2', 'zipcode2', 'country2', 'phone2');
 
         return $destinationAddress;
+    }
+
+    /**
+     * @return UpsShipmentRequest
+     */
+    private function getShipmentRequest(): UpsShipmentRequest
+    {
+        $shipmentRequest = new UpsShipmentRequest($this->getSourceAddress(), $this->getDestinationAddress(), new Ups(), '03');
+        $shipmentRequest->setPickupType(Ups::PICKUP_TYPE_CUSTOMER_COUNTER);
+        $shipmentRequest->setNegotiatedRates(true);
+        $shipmentRequest->setAddressVerificationEnabled(true);
+
+        return $shipmentRequest;
+    }
+
+    /**
+     * @return Package
+     */
+    private function getPackage(): Package
+    {
+        return new Package(new Weight(1.1, Weight::UNIT_LBS), new Cuboid(1, 2, 3, Cuboid::UNIT_INCH), 'doge');
+    }
+
+    /**
+     * @return RateRequest
+     */
+    private function getRateRequest(): RateRequest
+    {
+        $rateRequest = new RateRequest($this->getSourceAddress(), $this->getDestinationAddress(), true, new Ups());
+
+        return $rateRequest;
     }
 }
