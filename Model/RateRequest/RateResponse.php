@@ -22,7 +22,16 @@ class RateResponse
     {
         $this->request = $rateRequest;
 
-        foreach($response['RatingServiceSelectionResponse']['RatedShipment'] as $ratedShipment) {
+        foreach ($response['RatingServiceSelectionResponse']['RatedShipment'] as $ratedShipment) {
+            if (!empty($ratedShipment['NegotiatedRates'])) {
+                $negotiatedRate = new Money(
+                    (int) ($ratedShipment['NegotiatedRates']['NetSummaryCharges']['GrandTotal']['MonetaryValue'] * 100),
+                    new Currency($ratedShipment['NegotiatedRates']['NetSummaryCharges']['GrandTotal']['CurrencyCode'])
+                );
+            } else {
+                $negotiatedRate = null;
+            }
+
             $this->rates[] = new Rate(
                 $ratedShipment['Service']['Code'],
                 $rateRequest->getCarrier()->getServiceDescription($ratedShipment['Service']['Code']),
@@ -38,10 +47,7 @@ class RateResponse
                     (int) ($ratedShipment['TotalCharges']['MonetaryValue'] * 100),
                     new Currency($ratedShipment['TotalCharges']['CurrencyCode'])
                 ),
-                new Money(
-                    (int) ($ratedShipment['NegotiatedRates']['NetSummaryCharges']['GrandTotal']['MonetaryValue'] * 100),
-                    new Currency($ratedShipment['NegotiatedRates']['NetSummaryCharges']['GrandTotal']['CurrencyCode'])
-                )
+                $negotiatedRate
             );
         }
     }

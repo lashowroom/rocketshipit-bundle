@@ -20,6 +20,7 @@ use LAShowroom\RocketShipitBundle\Model\ShipmentRequest\ShipmentResponse;
 use LAShowroom\RocketShipitBundle\Model\ShipmentRequest\UpsShipmentRequest;
 use Money\Currency;
 use Money\Money;
+use Symfony\Component\Cache\Adapter\ArrayAdapter;
 
 class RocketShipitManagerTest extends \PHPUnit_Framework_TestCase
 {
@@ -67,9 +68,51 @@ class RocketShipitManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(new Money(167, new Currency('USD')), $response->getRates()[0]->getNegotiatedRate());
     }
 
-    /**
-     * @return RocketShipitManager
-     */
+    public function testGetRatesWithCacheMiss()
+    {
+        $rateRequest = $this->getRateRequest();
+        $rateRequest->addPackage($this->getPackage());
+
+        $cache = new ArrayAdapter();
+        $manager = $this->getManager();
+        $manager->setCacheItemPool($cache);
+
+        $response = $manager->getRates($rateRequest);
+
+        $this->assertInstanceOf(RateResponse::class, $response);
+
+        foreach ($response->getRates() as $rate) {
+            $this->assertInstanceOf(Rate::class, $rate);
+        }
+
+        $this->assertEquals('03', $response->getRates()[0]->getServiceCode());
+        $this->assertEquals('UPS Ground', $response->getRates()[0]->getServiceDescription());
+        $this->assertEquals(new Money(123, new Currency('USD')), $response->getRates()[0]->getTransportationCharges());
+        $this->assertEquals(new Money(156, new Currency('USD')), $response->getRates()[0]->getTotalCharges());
+        $this->assertEquals(new Money(145, new Currency('USD')), $response->getRates()[0]->getServiceOptionCharges());
+        $this->assertEquals(new Money(167, new Currency('USD')), $response->getRates()[0]->getNegotiatedRate());
+    }
+
+    public function testGetRatesWithCacheHit()
+    {
+        $rateRequest = $this->getRateRequest();
+        $rateRequest->addPackage($this->getPackage());
+
+        $cache = new ArrayAdapter();
+        $cacheItem = $cache->getItem('0079d7c4f9f19c8ce1a5e9ae87526190');
+        $cacheItem->set('doge');
+        $cache->save($cacheItem);
+
+        $manager = $this->getManager();
+        $manager->setCacheItemPool($cache);
+
+        $response = $manager->getRates($rateRequest);
+        $this->assertEquals('doge', $response);
+    }
+
+        /**
+         * @return RocketShipitManager
+         */
     private function getManager(): RocketShipitManager
     {
         $shipmentFactory = new ShipmentFactory(new PackageFactory(new RocketShipitConfiguration([])), new RocketShipitConfiguration([]));

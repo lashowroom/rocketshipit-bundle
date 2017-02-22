@@ -18,6 +18,9 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
+                ->scalarNode('cache')
+                    ->info('A PSR-6 compatible cache')
+                ->end()
                 ->arrayNode('generic')
                     ->isRequired()
                     ->children()

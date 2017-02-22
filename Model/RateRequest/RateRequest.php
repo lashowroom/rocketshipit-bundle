@@ -92,4 +92,17 @@ class RateRequest
     {
         return $this->destinationAddress;
     }
+
+    public function getCacheKey()
+    {
+        return md5(json_encode(
+            [
+                'source' => $this->sourceAddress,
+                'destination' => $this->destinationAddress,
+                'negotiatedRates' => $this->negotiatedRates,
+                'carrier' => $this->carrier,
+                'packages' => $this->packages,
+            ]
+        ));
+    }
 }
