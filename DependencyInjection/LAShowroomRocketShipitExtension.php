@@ -30,6 +30,8 @@ class LAShowroomRocketShipitExtension extends Extension
                     new Reference($config['cache'])
                 ])
             ;
+
+            unset($config['cache']);
         }
     }
 }
