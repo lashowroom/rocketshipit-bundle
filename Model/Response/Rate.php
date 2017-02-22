@@ -44,7 +44,7 @@ class Rate
      * @param Money  $totalCharges
      * @param Money  $negotiatedRate
      */
-    public function __construct($serviceCode, $serviceDescription, Money $transportationCharges, Money $serviceOptionCharges, Money $totalCharges, Money $negotiatedRate)
+    public function __construct($serviceCode, $serviceDescription, Money $transportationCharges, Money $serviceOptionCharges, Money $totalCharges, Money $negotiatedRate = null)
     {
         $this->serviceCode = $serviceCode;
         $this->serviceDescription = $serviceDescription;
