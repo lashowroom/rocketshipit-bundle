@@ -17,9 +17,7 @@ class LAShowroomRocketShipitExtension extends Extension
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
-
-        $container->setParameter('rocket-shipit_configuration', $config);
-
+        
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
 
@@ -33,5 +31,7 @@ class LAShowroomRocketShipitExtension extends Extension
 
             unset($config['cache']);
         }
+
+        $container->setParameter('rocket-shipit_configuration', $config);
     }
 }
