@@ -111,8 +111,8 @@ class RocketShipitManagerTest extends \PHPUnit_Framework_TestCase
     }
 
         /**
-     * @return RocketShipitManager
-     */
+         * @return RocketShipitManager
+         */
     private function getManager(): RocketShipitManager
     {
         $shipmentFactory = new ShipmentFactory(new PackageFactory(new RocketShipitConfiguration([])), new RocketShipitConfiguration([]));

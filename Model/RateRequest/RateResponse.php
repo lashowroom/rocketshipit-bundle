@@ -22,7 +22,7 @@ class RateResponse
     {
         $this->request = $rateRequest;
 
-        foreach($response['RatingServiceSelectionResponse']['RatedShipment'] as $ratedShipment) {
+        foreach ($response['RatingServiceSelectionResponse']['RatedShipment'] as $ratedShipment) {
             if (!empty($ratedShipment['NegotiatedRates'])) {
                 $negotiatedRate = new Money(
                     (int) ($ratedShipment['NegotiatedRates']['NetSummaryCharges']['GrandTotal']['MonetaryValue'] * 100),
